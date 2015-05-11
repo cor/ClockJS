@@ -1,0 +1,15 @@
+h1 {
+	font-family: Helvetica;
+}
+
+body {
+	background-color: #323232;
+	margin: 0;
+}
+
+canvas {
+	display: block;
+	margin: 0 auto;
+}
+
+	
