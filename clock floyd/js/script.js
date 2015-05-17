@@ -53,6 +53,36 @@ var pointers = {
 	}
 }
 
+var manImg;
+
+function drawMan(strDataURI, context, coords) {
+    if (!manImg) {
+      var img = new window.Image();
+      img.addEventListener("load", function () {
+          manImg = img;
+          context.drawImage(manImg, coords.x, coords.y);
+      });
+      img.setAttribute("src", strDataURI);
+    } else {
+          context.drawImage(manImg, coords.x, coords.y);
+    }
+}
+
+var sunImg;
+
+function drawSun(strDataURI, context, coords) {
+    if (!sunImg) {
+      var img = new window.Image();
+      img.addEventListener("load", function () {
+          sunImg = img;
+          context.drawImage(sunImg, coords.x, coords.y);
+      });
+      img.setAttribute("src", strDataURI);
+    } else {
+          context.drawImage(sunImg, coords.x, coords.y);
+    }
+}
+
 var numberCoords = [
 
 	{ x: 100, y: -200 },
@@ -128,9 +158,9 @@ function drawFrame() {
 	context.fillText("TIME", -20, -120);
   context.fillText("PINK FLOYD", -50, -90);
 
-  context.fillText("SO YOU RUN", -50, 50);
-  context.fillText("AND YOU RUN", -60, 80);
-  context.fillText("TO CATCH UP WITH THE SUN", -120, 110);
+  context.fillText("So you run", -40, 80);
+  context.fillText("And you run", -45, 110);
+  context.fillText("To catch up with the sun", -100, 140);
 
 
 	// draw hour lines
@@ -182,8 +212,14 @@ function drawPointer(pointerType) {
 	context.lineTo(0, -clockRadius * pointers[pointerType].length.end)
 	context.stroke();
 	context.closePath();
+
 	context.restore();
 
+}
+
+function drawImages() {
+    drawMan("../img/run-frames/run-1.png", context, { x: -240, y: -80});
+    drawSun("../img/sun.png", context, { x: 30, y: -80});
 }
 
 function drawNumbers() {
@@ -203,10 +239,11 @@ function tick() {
 
 	var currentTime = new Date()
 	pointers.second.currentTimeValue = currentTime.getSeconds();
-	pointers.minute.currentTimeValue = currentTime.getMinutes() + (pointers.second.currentTimeValue / 60)
-	pointers.hour.currentTimeValue = currentTime.getHours() + (pointers.minute.currentTimeValue / 60)
+	pointers.minute.currentTimeValue = currentTime.getMinutes() + (pointers.second.currentTimeValue / 60);
+	pointers.hour.currentTimeValue = currentTime.getHours() + (pointers.minute.currentTimeValue / 60);
 
 	drawFrame();
+  drawImages();
 	drawNumbers();
 	drawPointer("hour");
 	drawPointer("minute");
