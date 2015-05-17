@@ -126,6 +126,11 @@ function drawFrame() {
 	context.fillStyle = "black";
 	context.font = "20px Georgia";
 	context.fillText("TIME", -20, -120);
+  context.fillText("PINK FLOYD", -50, -90);
+
+  context.fillText("SO YOU RUN", -50, 50);
+  context.fillText("AND YOU RUN", -60, 80);
+  context.fillText("TO CATCH UP WITH THE SUN", -120, 110);
 
 
 	// draw hour lines
